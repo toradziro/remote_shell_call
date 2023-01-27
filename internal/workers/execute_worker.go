@@ -26,7 +26,7 @@ func ProcessExecution(clientData entity.ClientData) (error, *entity.ClientRespon
 	cmd.Stderr = &stderr
 
 	if runtime.GOOS != clientData.OsName {
-		return err, nil
+		return errors.New("Wrong OS in JSON"), nil
 	}
 	if errors.Is(cmd.Err, exec.ErrDot) {
 		cmd.Err = nil
@@ -43,5 +43,5 @@ func ProcessExecution(clientData entity.ClientData) (error, *entity.ClientRespon
 	if err != nil {
 		return err, nil
 	}
-	return err, &entity.ClientRespondData{Stdout: string(stdout.Bytes()), Stderr: string(stderr.Bytes())}
+	return nil, &entity.ClientRespondData{Stdout: string(stdout.Bytes()), Stderr: string(stderr.Bytes())}
 }

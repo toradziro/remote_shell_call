@@ -17,3 +17,8 @@ Expected respond form:
 Body: { "stdout": "result of program execution",
 "stderr": "error occured during exetion" }
 ```
+
+Also you can test it with curl, example command-line command:
+```
+curl --insecure --request POST 'https://127.0.0.1:8080/api/v1/remote-execution' --data-raw '{ "cmd": "ls -lah /", "os": "linux", "stdin":"" }'
+```
