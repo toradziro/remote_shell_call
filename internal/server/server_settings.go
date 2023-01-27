@@ -1,6 +1,7 @@
-package main
+package server
 
 import (
+	"exec-processor/internal/utils"
 	"fmt"
 	"io"
 	"os"
@@ -9,7 +10,7 @@ import (
 )
 
 type ServerSettings struct {
-	Settings []struct {
+	Settings struct {
 		IpAddress  string `yaml:"ip_address"`
 		Port       string `yaml:"port"`
 		ServerName string `yaml:"server_name"`
@@ -21,18 +22,18 @@ type ServerSettings struct {
 
 func readSettingsData(pathToSettings string, serverSettings *ServerSettings) {
 	file, err := os.Open(pathToSettings)
-	checkError(err)
+	utils.CheckError(err, "can't open server configuration file")
 	bytesRead, err := io.ReadAll(file)
-	checkError(err)
+	utils.CheckError(err, "can't read server configuration file")
 	err = file.Close()
-	checkError(err)
+	utils.CheckError(err, "can't close configuration file")
 	err = yaml.Unmarshal(bytesRead, serverSettings)
-	checkError(err)
+	utils.CheckError(err, "can't unmarshal configuration file")
 }
 
 func printDebugSettings(serverSettings *ServerSettings) {
-	fmt.Println("IpAddress is: " + serverSettings.Settings[0].IpAddress)
-	fmt.Println("Port is: " + serverSettings.Settings[0].Port)
-	fmt.Println("ServerName is: " + serverSettings.Settings[0].ServerName)
-	fmt.Println("Endpoint is: " + serverSettings.Settings[0].Endpoint)
+	fmt.Println("IpAddress is: " + serverSettings.Settings.IpAddress)
+	fmt.Println("Port is: " + serverSettings.Settings.Port)
+	fmt.Println("ServerName is: " + serverSettings.Settings.ServerName)
+	fmt.Println("Endpoint is: " + serverSettings.Settings.Endpoint)
 }

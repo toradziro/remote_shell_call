@@ -7,4 +7,4 @@ openssl genrsa -out server.key 2048
 # List ECDSA the supported curves (openssl ecparam -list_curves)
 openssl ecparam -genkey -name secp384r1 -out server.key
 openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650
-go build main.go server_settings.go client_data.go
+go build -o ./executor ./cmd/main.go

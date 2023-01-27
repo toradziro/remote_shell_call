@@ -1,4 +1,4 @@
-package main
+package entity
 
 import "encoding/json"
 
@@ -13,7 +13,7 @@ type ClientRespondData struct {
 	Stderr string `json:"stderr"`
 }
 
-func readClientData(readBytes []byte, clientData *ClientData) error {
+func ReadClientData(readBytes []byte, clientData *ClientData) error {
 	err := json.Unmarshal(readBytes, clientData)
 	return err
 }

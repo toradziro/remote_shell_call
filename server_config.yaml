@@ -1,5 +1,5 @@
 server_properties:
-  - ip_address:  "127.0.0.1"
+    ip_address:  "127.0.0.1"
     port:        "8080"
     server_name: "exec-processor"
     endpoint:    "/api/v1/remote-execution"
